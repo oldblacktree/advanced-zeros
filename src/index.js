@@ -1,10 +1,14 @@
 module.exports = function getZerosCount(number, base) {
 
+//create multipliers object of a type { key : [amount1, amount2]}
+// when key - multiplier 
+// amount1 - amount of multiplier that base contains
+// amount2 - amount of multiplier that number contains
+
   let remainder = base;
   let multipliers = {};
   let divisor = 2;
   let min = Infinity;
-
 
   while (remainder !== 1) {
     if (remainder % divisor === 0) {
@@ -18,16 +22,15 @@ module.exports = function getZerosCount(number, base) {
     divisor++;
   }
 
- 
   for (let key in multipliers) {
     multipliers[key].push(getMultiplierAmount(number, key));
+
     if (multipliers[key][1] / multipliers[key][0] < min) {
       min = Math.floor(multipliers[key][1] / multipliers[key][0]);
     }
   }
 
   return min;
-
 
   function getMultiplierAmount(number, multiplier) {
     let amount = 0;
@@ -39,5 +42,4 @@ module.exports = function getZerosCount(number, base) {
     }
     return amount;
   }
-
 }
